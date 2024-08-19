@@ -1,11 +1,14 @@
-/* Adds Iosevka font */
+/* Adds Iosevka fonts */
 @font-face {
-	font-family: "Iosevka";
+	font-family: "Iosevka Fixed";
+	src:
+		url("fonts/Iosevka-Fixed/IosevkaFixed-Regular.woff2") format("woff2");
 }
 
-/* Adds Julia Fixed font */
 @font-face {
-	font-family: "Julia Fixed";
+	font-family: "Julia Mono";
+	src:
+		url("fonts/JuliaMono/JuliaMono-Regular.woff2") format("woff2");
 }
 
 
