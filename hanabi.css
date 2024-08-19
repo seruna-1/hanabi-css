@@ -1,0 +1,146 @@
+/* Adds Iosevka font */
+@font-face {
+	font-family: "Iosevka";
+}
+
+/* Adds Julia Fixed font */
+@font-face {
+	font-family: "Julia Fixed";
+}
+
+
+
+/* Global variables. */
+:root, ::backdrop {	
+	--main-font: "Iosevka";
+	--standard-border-radius: 5%;
+
+	/* Default (light) theme */
+ 	--bg: #fff;
+	--accent-bg: #f5f7ff;
+	--text-color: #212121;
+	--text-light: #585858;
+	--border: #545454;
+	--accent: #ffb300;
+	--accent-hover: #1266e2;
+	--accent-text: var(--bg);
+	--code: #d81b60;
+	--preformatted: #444;
+	--marked: #ffdd33;
+	--disabled: #efefef;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+
+	:root, ::backdrop {
+		color-scheme: dark;
+		--bg: #212121;
+		--accent-bg: #2b2b2b;
+		--text-color: #dcdcdc;
+		--text-light: #ababab;
+		--accent: #ffb300;
+		--accent-hover: #ffe099;
+		--accent-text: var(--bg);
+		--code: #f06292;
+		--preformatted: #ccc;
+		--disabled: #111;
+	}
+	
+	/* Add a bit of transparency so light media isn't so glaring in dark mode */
+	img, video { opacity: 0.8;}
+}
+
+html {
+	margin: 0;
+	padding: 0;
+	width: 0;
+	color: var(--text-color);
+	background-color: var(--bg);
+
+	/* Set the font globally */
+	font-family: var(--main-font);
+	
+	scroll-behavior: smooth;
+	font-size: 1.15rem;
+	line-height: 1.3rem;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	display: grid;
+
+	/* Space for main content will be the middle grid column */
+	grid-template-columns: 1fr min(100vw, 100vh) 1fr;
+	
+	margin: 0;
+}
+
+/* Every element under body will be placed on middle column */
+body > * {
+  grid-column: 2;
+}
+
+header {
+	margin: 0;
+	background-color: var(--accent-bg);
+	border-bottom: 1px solid var(--border);
+	text-align: center;
+	grid-column-start: 1;
+	grid-column-end: 4;
+}
+
+header {
+	display: flex;
+}
+
+header > div {
+	margin: auto;
+}
+
+img, video {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--standard-border-radius);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.1;
+	font-weight: 700;
+	margin-top: 3rem;
+	margin-bottom: 1.5rem;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+h1 {
+  font-size: 2.35em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.75em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.25em;
+}
+
+h6 {
+  font-size: 1em;
+}
+
+p {
+	margin-top: 0px;
+	margin-bottom: 2rem;
+}
