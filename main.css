@@ -16,10 +16,10 @@
 /* Global variables. */
 :root, ::backdrop {
 
+	/* 1% of the side of the biggest square that can fit into viewport */
 	--vq: min(1vw, 1vh);
 	
 	--main-font: "Iosevka";
-	--standard-border-radius: 0;
 	--border-width: 0.1rem;
 
 	/* Default (light) theme */
@@ -80,30 +80,37 @@ body {
 
 	/* Space for main content will be the middle grid column */
 	grid-template-columns: 1fr calc( var(--vq) * 100 ) 1fr;
-	
-	margin: 0;
+
 }
 
-/* Every element under body will be placed on middle column */
-body > * { grid-column: 2; }
+
+body > * {
+	
+	/* Every element under body will be placed on middle column */
+	grid-column: 2;
+	
+	margin-left: 1rem;
+}
 
 header {
 	margin: 0;
 	background-color: var(--accent-bg);
 	border-bottom: 1px solid var(--border);
 	text-align: center;
-	grid-column-start: 1;
-	grid-column-end: 4;
 
 	display: grid;
-	
-	/* Space for main content will be the middle grid column */
+
+	/* Three columns, same as body */
 	grid-template-columns: 1fr calc( var(--vq) * 100 ) 1fr;
 
+	/* Occupies all columns of body, equivalent to 100vw */
+	grid-column-start: 1;
+	grid-column-end: 4;
+	
 }
 
 header > * {
-	margin: auto;
+	/* Space for content will be the middle grid column */
 	grid-column: 2;
 }
 
@@ -113,6 +120,7 @@ img, video {
 }
 
 figure > img {
+	/* Center images inside [figure] element */
 	display: block;
 	margin: auto;
 }
@@ -122,17 +130,17 @@ figure {
 	padding-top: 1rem;
 	padding-left: 1rem;
 	padding-right: 1rem;
-	font-size: 0.8rem;
+	font-size: 0.8em;
 	border-style: solid;
 	border-width: var(--border-width);
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-size: 1.4rem;
+	font-size: 1.4em;
 	line-height: 1.1;
 	font-weight: 700;
-	margin-top: 3rem;
-	margin-bottom: 1.5rem;
+	margin-top: 3em;
+	margin-bottom: 1.5em;
 	overflow-wrap: break-word;
 	word-wrap: break-word;
 	word-break: break-word;
@@ -154,7 +162,7 @@ select {
 	padding: 0.5em;
 	margin: 0.6em;
 	box-shadow: none;
-	color: var(--text);
+	color: var(--text-color);
 	background-color: var(--bg);
 	border: 1px solid var(--border);
 }
