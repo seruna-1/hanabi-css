@@ -65,7 +65,7 @@ html {
 	font-family: var(--main-font);
 	
 	scroll-behavior: smooth;
-	font-size: 1.10rem;
+	font-size: 1.1rem;
 	line-height: 1.3rem;
 }
 
@@ -112,6 +112,8 @@ img, video {
 	border-radius: var(--standard-border-radius);
 }
 
+figure {font-size: 0.8em;}
+
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.1;
 	font-weight: 700;
@@ -123,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.35em;
+  font-size: 2.2em;
 }
 
 h2 {
@@ -131,19 +133,19 @@ h2 {
 }
 
 h3 {
-  font-size: 1.75em;
+  font-size: 1.8em;
 }
 
 h4 {
-  font-size: 1.5em;
+  font-size: 1.6em;
 }
 
 h5 {
-  font-size: 1.25em;
+  font-size: 1.4em;
 }
 
 h6 {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 p {
@@ -153,4 +155,16 @@ p {
 
 a, a:visited {
 	color: var(--accent);
+	text-decoration: none;
+}
+
+select {
+	font-family: inherit;
+	padding: 0.5em;
+	margin: 0.6em;
+	border-radius: var(--standard-border-radius);
+	box-shadow: none;
+	color: var(--text);
+	background-color: var(--bg);
+	border: 1px solid var(--border);
 }
