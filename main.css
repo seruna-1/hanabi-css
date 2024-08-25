@@ -1,25 +1,28 @@
 /* Adds Iosevka fonts */
-@font-face {
+@font-face
+{
 	font-family: "Iosevka Fixed";
 	src:
 		url("fonts/Iosevka-Fixed/IosevkaFixed-Regular.woff2") format("woff2");
 }
 
-@font-face {
+
+@font-face
+{
 	font-family: "Julia Mono";
 	src:
 		url("fonts/JuliaMono/JuliaMono-Regular.woff2") format("woff2");
 }
 
 
-
 /* Global variables. */
-:root, ::backdrop {
+:root, ::backdrop
+{
 
 	/* Side of the biggest square that can fit into viewport */
 	--vq: min(100vw, 100vh);
 	
-	--main-font: "Iosevka Fixed";
+	--main-font: "Julia Mono";
 	--border-width: 0.1rem;
 
 	/* Default (light) theme */
@@ -37,10 +40,13 @@
 	--disabled: #efefef;
 }
 
-/* Dark theme */
-@media (prefers-color-scheme: dark) {
 
-	:root, ::backdrop {
+/* Dark theme */
+@media (prefers-color-scheme: dark)
+{
+
+	:root, ::backdrop
+	{
 		color-scheme: dark;
 		--bg: #212121;
 		--accent-bg: #2b2b2b;
@@ -58,7 +64,9 @@
 	img, video { opacity: 0.8;}
 }
 
-html {
+
+html
+{
 	margin: 0;
 	padding: 0;
 	width: 100vw;
@@ -72,7 +80,9 @@ html {
 	font-size: 1rem;
 }
 
-body {
+
+body
+{
 	margin: 0;
 	padding: 0;
 	width: 100vw;
@@ -85,12 +95,15 @@ body {
 }
 
 
-main {
+main
+{
 	grid-column: 2;	
 	margin-left: 1rem;
 }
 
-header {
+
+header
+{
 	margin: 0;
 	background-color: var(--accent-bg);
 	border-color: var(--border);
@@ -109,23 +122,31 @@ header {
 	
 }
 
-header > * {
+
+header > *
+{
 	/* Space for content will be the middle grid column */
 	grid-column: 2;
 }
 
-img, video {
+
+img, video
+{
 	max-width: 90%;
 	height: auto;
 }
 
-figure > img {
+
+figure > img
+{
 	/* Center images inside [figure] element */
 	display: block;
 	margin: auto;
 }
 
-figure {
+
+figure
+{
 	max-width: 90%;
 	padding-top: 1rem;
 	padding-left: 1rem;
@@ -135,7 +156,9 @@ figure {
 	border-width: var(--border-width);
 }
 
-h1, h2, h3, h4, h5, h6 {
+
+h1, h2, h3, h4, h5, h6
+{
 	font-size: 1.4em;
 	line-height: 1.1;
 	font-weight: 700;
@@ -146,18 +169,43 @@ h1, h2, h3, h4, h5, h6 {
 	word-break: break-word;
 }
 
-p, li {
+
+p, li
+{
 	line-height: 1.3em;
 	margin-top: 2em;
 	margin-bottom: 2em;
 }
 
-a, a:visited {
+
+a, a:visited
+{
 	color: var(--accent);
 	text-decoration: none;
 }
 
-select {
+
+code, kbd
+{
+	padding: 2px 5px;
+	background: var(--accent-bg);
+	color: var(--code);
+}
+
+
+button, .button, a.button,  input[type="submit"], input[type="reset"], input[type="button"], label[type="button"]
+{
+  border: 1px solid var(--accent);
+  background-color: var(--accent);
+  color: var(--accent-text);
+  padding: 0.5rem 0.9rem;
+  text-decoration: none;
+  line-height: normal;
+}
+
+
+select
+{
 	font-family: inherit;
 	padding: 0.5em;
 	margin: 0.6em;
@@ -165,4 +213,39 @@ select {
 	color: var(--text-color);
 	background-color: var(--bg);
 	border: 1px solid var(--border);
+}
+
+
+mark
+{
+	padding: 2px 5px;
+	background-color: var(--marked);
+	color: black;
+}
+
+
+mark a
+{
+  color: #0d47a1;
+}
+
+
+kbd
+{
+  color: var(--preformatted);
+  border: 1px solid var(--preformatted);
+  border-bottom: 3px solid var(--preformatted);
+  padding: 0.1rem 0.4rem;
+}
+
+
+blockquote
+{
+  margin-inline-start: 2rem;
+  margin-inline-end: 0;
+  margin-block: 2rem;
+  padding: 0.4rem 0.8rem;
+  border-inline-start: 0.35rem solid var(--accent);
+  color: var(--text-light);
+  font-style: italic;
 }
