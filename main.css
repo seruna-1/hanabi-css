@@ -21,8 +21,9 @@
 
 	/* Side of the biggest square that can fit into viewport */
 	--vq: min(100vw, 100vh);
-	
+
 	--main-font: "Julia Mono";
+
 	--border-width: 0.1rem;
 
 	/* Default (light) theme */
@@ -268,6 +269,12 @@ blockquote
 }
 
 
+hr
+{
+	color: white;
+}
+
+
 #goTopButton
 {
 	width: fit-content;
@@ -287,6 +294,8 @@ blockquote
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
+	border-bottom-style: solid;
+	border-bottom-width: 0.1rem;
 }
 
 
