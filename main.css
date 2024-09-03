@@ -32,12 +32,11 @@
 	--text-color: #212121;
 	--text-light: #585858;
 	--border: #545454;
-	--accent: #ffb300;
+	--clickable: #ffb300;
 	--accent-hover: #1266e2;
 	--accent-text: var(--bg);
-	--code: #1f5c03;
+	--marked: #1f5c03;
 	--preformatted: #444;
-	--marked: #ffdd33;
 	--disabled: #efefef;
 }
 
@@ -53,14 +52,14 @@
 		--accent-bg: #2b2b2b;
 		--text-color: #dcdcdc;
 		--text-light: #ababab;
-		--accent: #ffb300;
+		--clickable: #ffb300;
 		--accent-hover: #ffe099;
 		--accent-text: var(--bg);
-		--code: #1f5c03;
+		--marked: #7bff57;
 		--preformatted: #ccc;
 		--disabled: #111;
 	}
-	
+
 	/* Add a bit of transparency so light media isn't so glaring in dark mode */
 	img, video { opacity: 0.8;}
 }
@@ -76,7 +75,7 @@ html
 
 	/* Set the font globally */
 	font-family: var(--main-font);
-	
+
 	scroll-behavior: smooth;
 	font-size: 1rem;
 }
@@ -101,6 +100,7 @@ main
 	grid-column: 2;
 	grid-row: 2;
 	margin-left: 1rem;
+	margin-right: 1rem;
 }
 
 
@@ -109,7 +109,7 @@ header
 	margin: 0;
 	background-color: var(--accent-bg);
 	border-color: var(--border);
-	border-style: solid;
+	border-bottom-style: solid;
 	border-width: var(--border-width);
 	text-align: center;
 
@@ -121,7 +121,6 @@ header
 	/* Occupies all columns of body, equivalent to 100vw */
 	grid-column-start: 1;
 	grid-column-end: 4;
-	
 }
 
 
@@ -183,7 +182,7 @@ p, li, a, mark
 
 a, a:visited
 {
-	color: var(--accent);
+	color: var(--clickable);
 	text-decoration: none;
 }
 
@@ -194,26 +193,33 @@ a:hover
 }
 
 
-div.code
+/* In a div with class [scroll], text is not wrapped. Use this to insert code or something like an email, that is better understood whithout wrap. */
+div.scroll
 {
     overflow-x: scroll;
+}
+
+
+div.scroll > *
+{
+    tex-wrap: nowrap;
 }
 
 
 code, kbd
 {
     text-wrap: nowrap;
-	padding: 2px 5px;
+	padding: 0.1em 0.5em;
 	background: var(--accent-bg);
-	color: var(--code);
+	color: var(--marked);
 }
 
 
 button, .button, a.button,  input[type="submit"], input[type="reset"], input[type="button"], label[type="button"]
 {
 	margin: 1em;
-	border: 0px solid var(--accent);
-	background-color: var(--accent);
+	border: 0px solid var(--clickable);
+	background-color: var(--clickable);
 	color: var(--accent-text);
 	padding: 0.5rem 0.9rem;
 	text-decoration: none;
