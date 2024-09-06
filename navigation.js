@@ -10,6 +10,8 @@ const sectionIndex = document.getElementById("sectionIndex");
 sectionIndex.style.setProperty("display", "none");
 
 
+
+/* Scrolls page to top */
 function goTop ()
 {
 	document.querySelector("header").scrollIntoView();
@@ -17,6 +19,12 @@ function goTop ()
 }
 
 
+
+/*
+
+
+
+*/
 function generateSectionIndex ()
 {
 	const headings = document.querySelectorAll("h1");
@@ -26,6 +34,7 @@ function generateSectionIndex ()
 	{
 		headings[i].setAttribute("id", "head" + i);
 		
+		/* Each anchor is inside a paragraph */
 		let section = document.createElement("p");
 
 		let anchor = document.createElement("a");
@@ -37,9 +46,12 @@ function generateSectionIndex ()
 		anchor.addEventListener("click", scrollToHeading);
 
 		section.appendChild(anchor);
+
 		sectionIndex.appendChild(section);
 	}
-	
+
+	/* sectionIndex element is hidden by default */
+	sectionIndex.style.display = "none";
 	
 	return;
 }
@@ -65,6 +77,26 @@ function toggleSectionIndex ()
 	
 	return;
 }
+
+
+
+function toggleIdiomIndex ()
+{
+	
+
+	return;
+}
+
+
+
+/*
+Toggles element [main] by element with id [substituteId].
+*/
+function toggleMainContent ( substituteId )
+{
+	return;
+}
+
 
 
 /*
@@ -95,4 +127,6 @@ function scrollToHeading ( event )
 }
 
 
+
 generateSectionIndex();
+

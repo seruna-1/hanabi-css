@@ -1,4 +1,4 @@
-/* Adds Iosevka fonts */
+/* Two font faces */
 @font-face
 {
 	font-family: "Iosevka Fixed";
@@ -26,43 +26,34 @@
 
 	--border-width: 0.1rem;
 
-	/* Default (light) theme */
- 	--bg: #fff;
-	--accent-bg: #f5f7ff;
-	--text-color: #212121;
-	--text-light: #585858;
-	--border: #545454;
-	--clickable: #ffb300;
-	--accent-hover: #1266e2;
-	--accent-text: var(--bg);
-	--marked: #1f5c03;
-	--preformatted: #444;
-	--disabled: #efefef;
+	/* Normal text*/
+	--color-text-normal: #dcdcdc;
+
+	/* Highlited text (not interative) */
+	--color-text-marked: #9fff94;
+
+	/* Less important text, or text ofuscated */
+	--color-text-shadowed: grey;
+
+	/* Things that can be clicked. Includes anchors (links). Includes buttons (this is the color of a button backround). Does not includes text inside buttons, since its the button itself that can be clicked, not the text.*/
+	--color-clickable: #ffb300;
+
+	/* Clickable thing that was clicked */
+	--color-clicked: #ffe099;
+
+	/* Color of lines that separate things (borders or horizontal rules, for example) */
+	--color-line: #545454;
+
+	--accent-bg: #2b2b2b;
+	--text-color: #dcdcdc;
+	--text-light: #ababab;
+	--accent-text: var(--background-color);
+	--disabled: #111;
 }
 
 
-/* Dark theme */
-@media (prefers-color-scheme: dark)
-{
-
-	:root, ::backdrop
-	{
-		color-scheme: dark;
-		--bg: #212121;
-		--accent-bg: #2b2b2b;
-		--text-color: #dcdcdc;
-		--text-light: #ababab;
-		--clickable: #ffb300;
-		--accent-hover: #ffe099;
-		--accent-text: var(--bg);
-		--marked: #7bff57;
-		--preformatted: #ccc;
-		--disabled: #111;
-	}
-
-	/* Add a bit of transparency so light media isn't so glaring in dark mode */
-	img, video { opacity: 0.8;}
-}
+/* Add a bit of transparency so light media isn't so glaring in dark mode */
+img, video { opacity: 0.8;}
 
 
 html
@@ -70,8 +61,8 @@ html
 	margin: 0;
 	padding: 0;
 	width: 100vw;
-	color: var(--text-color);
-	background-color: var(--bg);
+	color: var(--color-text-normal);
+	background-color: #212121;
 
 	/* Set the font globally */
 	font-family: var(--main-font);
@@ -146,6 +137,13 @@ figure > img
 }
 
 
+figure > *
+{
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+
 figure
 {
 	max-width: 90%;
@@ -155,6 +153,7 @@ figure
 	font-size: 0.8em;
 	border-style: solid;
 	border-width: var(--border-width);
+	border-color: white;
 }
 
 
@@ -189,27 +188,31 @@ a, a:visited
 
 a:hover
 {
-	color: var(--accent-hover);
+	color: var(--clicked);
 }
 
 
 /* In a div with class [scroll], text is not wrapped. Use this to insert code or something like an email, that is better understood whithout wrap. */
 div.scroll
 {
-    overflow-x: scroll;
+	height: auto;
+	overflow-x: scroll;
+
+	/* There is no overflow in y axis, because the height of the div grows along with the content. However, this prevents the browser to show vertical srcollbar. */
+	overflow-y: hidden;
 }
 
 
 div.scroll > *
 {
-    tex-wrap: nowrap;
+    text-wrap: nowrap;
 }
 
 
-code, kbd
+/* Marked things */
+mark, code, kbd, blockquote > *
 {
-    text-wrap: nowrap;
-	padding: 0.1em 0.5em;
+	padding: 0.1em;
 	background: var(--accent-bg);
 	color: var(--marked);
 }
@@ -229,8 +232,8 @@ button, .button, a.button,  input[type="submit"], input[type="reset"], input[typ
 
 button:enabled:hover, .button:not([aria-disabled="true"]):hover, input[type="submit"]:enabled:hover, input[type="reset"]:enabled:hover, input[type="button"]:enabled:hover, label[type="button"]:hover
 {
-	background-color: var(--accent-hover);
-	border-color: var(--accent-hover);
+	background-color: var(--clicked);
+	border-color: var(--clicked);
 	cursor: pointer;
 }
 
@@ -242,49 +245,20 @@ select
 	margin: 0.6em;
 	box-shadow: none;
 	color: var(--text-color);
-	background-color: var(--bg);
+	background-color: var(--background-color);
 	border: 1px solid var(--border);
-}
-
-
-mark
-{
-	padding: 2px 5px;
-	background-color: var(--marked);
-	color: black;
-}
-
-
-mark a
-{
-  color: #0d47a1;
-}
-
-
-kbd
-{
-  color: var(--preformatted);
-  border: 1px solid var(--preformatted);
-  border-bottom: 3px solid var(--preformatted);
-  padding: 0.1rem 0.4rem;
-}
-
-
-blockquote
-{
-  margin-inline-start: 2rem;
-  margin-inline-end: 0;
-  margin-block: 2rem;
-  padding: 0.4rem 0.8rem;
-  border-inline-start: 0.35rem solid var(--accent);
-  color: var(--text-light);
-  font-style: italic;
 }
 
 
 hr
 {
 	color: white;
+}
+
+
+cite
+{
+	color: grey;
 }
 
 
