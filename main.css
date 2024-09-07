@@ -26,34 +26,73 @@
 
 	--border-width: 0.1rem;
 
+	--color-background-1: #212121;
+
+	--color-background-2: #2b2b2b;
+
 	/* Normal text*/
 	--color-text-normal: #dcdcdc;
 
 	/* Highlited text (not interative) */
-	--color-text-marked: #9fff94;
+	--color-text-marked: #14bb00;
 
-	/* Less important text, or text ofuscated */
+	/* Less important text, ofuscated text */
 	--color-text-shadowed: grey;
 
 	/* Things that can be clicked. Includes anchors (links). Includes buttons (this is the color of a button backround). Does not includes text inside buttons, since its the button itself that can be clicked, not the text.*/
-	--color-clickable: #ffb300;
+	--color-clickable-normal: #ffb300;
 
-	/* Clickable thing that was clicked */
-	--color-clicked: #ffe099;
+	--color-clickable-selected: #ffcd5b;
 
-	/* Color of lines that separate things (borders or horizontal rules, for example) */
-	--color-line: #545454;
-
-	--accent-bg: #2b2b2b;
-	--text-color: #dcdcdc;
-	--text-light: #ababab;
-	--accent-text: var(--background-color);
-	--disabled: #111;
+	/* Color of lines that separate things (includes horizontal rules) */
+	--color-border: #545454;
 }
 
 
 /* Add a bit of transparency so light media isn't so glaring in dark mode */
 img, video { opacity: 0.8;}
+
+
+/* Marked text */
+mark, code, kbd, blockquote > *
+{
+	color: var(--color-text-marked);
+}
+
+
+/* Shadowed text */
+cite
+{
+	color: var(--color-text-shadowed);
+}
+
+
+/* Anchors (links) */
+a
+{
+	color: var(--color-clickable-normal);
+	text-decoration: none;
+}
+
+
+/* Anchor selected */
+a:hover
+{
+	color: var(--color-clickable-selected);
+}
+
+
+/* Color of clickable things when focused */
+button:enabled:hover, input[type="submit"]:enabled:hover, input[type="reset"]:enabled:hover, input[type="button"]:enabled:hover
+{
+	background-color: var(--color-clickable-selected);
+}
+
+
+hr
+{
+	color: var(--color-border);
+}
 
 
 html
@@ -62,7 +101,7 @@ html
 	padding: 0;
 	width: 100vw;
 	color: var(--color-text-normal);
-	background-color: #212121;
+	background-color: var(--color-background-1);
 
 	/* Set the font globally */
 	font-family: var(--main-font);
@@ -81,25 +120,18 @@ body
 
 	/* Space for main content will be the middle grid column */
 	grid-template-columns: 1fr var(--vq) 1fr;
+
+	/* First row is for header */
 	grid-template-rows: auto auto;
 
-}
-
-
-main
-{
-	grid-column: 2;
-	grid-row: 2;
-	margin-left: 1rem;
-	margin-right: 1rem;
 }
 
 
 header
 {
 	margin: 0;
-	background-color: var(--accent-bg);
-	border-color: var(--border);
+	background-color: var(--color-background-2);
+	border-color: var(--color-border);
 	border-bottom-style: solid;
 	border-width: var(--border-width);
 	text-align: center;
@@ -122,9 +154,20 @@ header > *
 }
 
 
-img, video
+main
 {
-	max-width: 90%;
+	grid-column: 2;
+	grid-row: 2;
+	margin-bottom: 2rem;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+
+figure, img, video, div.scroll
+{
+	margin: auto;
+	width: 96%;
 	height: auto;
 }
 
@@ -146,14 +189,10 @@ figure > *
 
 figure
 {
-	max-width: 90%;
-	padding-top: 1rem;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	font-size: 0.8em;
+	font-size: 0.8rem;
 	border-style: solid;
 	border-width: var(--border-width);
-	border-color: white;
+	border-color: var(--color-border);
 }
 
 
@@ -162,40 +201,34 @@ h1, h2, h3, h4, h5, h6
 	font-size: 1.4rem;
 	line-height: 1.1;
 	font-weight: 700;
-	margin-top: 3em;
-	margin-bottom: 1.5em;
+	margin-top: 3rem;
+	margin-bottom: 1.5rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
 	overflow-wrap: break-word;
 	word-wrap: break-word;
 	word-break: break-word;
 }
 
 
-p, li, a, mark
+p, li
 {
 	font-size: inherit;
 	line-height: 1.3em;
 	margin-top: 2em;
 	margin-bottom: 2em;
-}
-
-
-a, a:visited
-{
-	color: var(--clickable);
-	text-decoration: none;
-}
-
-
-a:hover
-{
-	color: var(--clicked);
+	margin-left: 1em;
+	margin-right: 1em;
 }
 
 
 /* In a div with class [scroll], text is not wrapped. Use this to insert code or something like an email, that is better understood whithout wrap. */
 div.scroll
 {
-	height: auto;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	background-color: var(--color-background-2);
+
 	overflow-x: scroll;
 
 	/* There is no overflow in y axis, because the height of the div grows along with the content. However, this prevents the browser to show vertical srcollbar. */
@@ -205,36 +238,25 @@ div.scroll
 
 div.scroll > *
 {
-    text-wrap: nowrap;
+	margin-right: 2em;
+	margin-left: 2em;
+	text-wrap: nowrap;
 }
 
 
-/* Marked things */
-mark, code, kbd, blockquote > *
-{
-	padding: 0.1em;
-	background: var(--accent-bg);
-	color: var(--marked);
-}
-
-
-button, .button, a.button,  input[type="submit"], input[type="reset"], input[type="button"], label[type="button"]
+/*Clickable things*/
+button, input[type="submit"], input[type="reset"], input[type="button"]
 {
 	margin: 1em;
-	border: 0px solid var(--clickable);
-	background-color: var(--clickable);
-	color: var(--accent-text);
-	padding: 0.5rem 0.9rem;
+	padding: 0.5rem;
+	border-width: 0px;
+	background-color: var(--color-clickable-normal);
+
+	/* Text color is background-1 */
+	color: var(--color-background-1);
+
 	text-decoration: none;
 	line-height: normal;
-}
-
-
-button:enabled:hover, .button:not([aria-disabled="true"]):hover, input[type="submit"]:enabled:hover, input[type="reset"]:enabled:hover, input[type="button"]:enabled:hover, label[type="button"]:hover
-{
-	background-color: var(--clicked);
-	border-color: var(--clicked);
-	cursor: pointer;
 }
 
 
@@ -246,19 +268,7 @@ select
 	box-shadow: none;
 	color: var(--text-color);
 	background-color: var(--background-color);
-	border: 1px solid var(--border);
-}
-
-
-hr
-{
-	color: white;
-}
-
-
-cite
-{
-	color: grey;
+	border: 1px solid var(--color-border);
 }
 
 
