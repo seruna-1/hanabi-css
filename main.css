@@ -157,7 +157,6 @@ header > *
 
 main
 {
-	padding-bottom: 2rem;
 	padding-right: 0.5rem;
 	padding-left: 0.5rem;
 	grid-column: 2;
@@ -168,6 +167,7 @@ main
 /* Things that are centered */
 figure, img, video, div.scroll
 {
+	display: block;
 	margin-right: auto;
 	margin-left: auto;
 	width: 96%;
@@ -186,10 +186,8 @@ body, main, figure, div
 figure, div
 {
 	box-sizing: border-box;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-	padding-right: 0.5rem;
-	padding-left: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
 
@@ -206,7 +204,7 @@ figure, div.scroll
 /* Line height is the same for all textual elements */
 h1, h2, h3, h4, h5, h6, p, li, figcaption
 {
-	line-height: 1.3rem;
+	line-height: 1.3em;
 }
 
 
@@ -223,7 +221,7 @@ h1, h2, h3, h4, h5, h6
 
 
 /* Margin top and bottom for almost anything */
-p, li, figcaption, img, figure, div
+p, li, figcaption, img, figure, div, code, mark
 {
 	margin-top: 2em;
 	margin-bottom: 2em;
