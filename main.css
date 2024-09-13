@@ -61,7 +61,7 @@ mark, code, kbd, blockquote > *
 
 
 /* Shadowed text */
-cite
+figcaption
 {
 	color: var(--color-text-shadowed);
 }
@@ -89,6 +89,7 @@ button:enabled:hover, input[type="submit"]:enabled:hover, input[type="reset"]:en
 }
 
 
+/* Gives border color to a border by definition */
 hr
 {
 	color: var(--color-border);
@@ -114,7 +115,7 @@ html
 body
 {
 	margin: 0;
-	padding: 0;
+	padding 0;
 	width: 100vw;
 	display: grid;
 
@@ -156,77 +157,82 @@ header > *
 
 main
 {
+	padding-bottom: 2rem;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
 	grid-column: 2;
 	grid-row: 2;
-	margin-bottom: 2rem;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
 }
 
 
+/* Things that are centered */
 figure, img, video, div.scroll
 {
-	margin: auto;
+	margin-right: auto;
+	margin-left: auto;
 	width: 96%;
 	height: auto;
 }
 
 
-figure > img
+/* Prevents overflow of container-like elements */
+body, main, figure, div
 {
-	/* Center images inside [figure] element */
-	display: block;
-	margin: auto;
+	box-sizing: border-box;
 }
 
 
-figure > *
+/* Padding of container-like elements */
+figure, div
 {
-	margin-left: 1rem;
-	margin-right: 1rem;
+	box-sizing: border-box;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
 }
 
 
-figure
+/* Container-like elements that have border */
+figure, div.scroll
 {
-	font-size: 0.8rem;
 	border-style: solid;
 	border-width: var(--border-width);
 	border-color: var(--color-border);
 }
 
 
+
+/* Line height is the same for all textual elements */
+h1, h2, h3, h4, h5, h6, p, li, figcaption
+{
+	line-height: 1.3rem;
+}
+
+
 h1, h2, h3, h4, h5, h6
 {
 	font-size: 1.4rem;
-	line-height: 1.1;
-	font-weight: 700;
+	font-weight: bold;
 	margin-top: 3rem;
 	margin-bottom: 1.5rem;
-	margin-left: 1rem;
-	margin-right: 1rem;
 	overflow-wrap: break-word;
 	word-wrap: break-word;
 	word-break: break-word;
 }
 
 
-p, li
+/* Margin top and bottom for almost anything */
+p, li, figcaption, img, figure, div
 {
-	font-size: inherit;
-	line-height: 1.3em;
 	margin-top: 2em;
 	margin-bottom: 2em;
-	margin-left: 1em;
-	margin-right: 1em;
 }
 
 
 /* In a div with class [scroll], text is not wrapped. Use this to insert code or something like an email, that is better understood whithout wrap. */
 div.scroll
 {
-	padding-top: 1em;
-	padding-bottom: 1em;
 	background-color: var(--color-background-2);
 
 	overflow-x: scroll;
@@ -238,8 +244,6 @@ div.scroll
 
 div.scroll > *
 {
-	margin-right: 2em;
-	margin-left: 2em;
 	text-wrap: nowrap;
 }
 
@@ -256,19 +260,6 @@ button, input[type="submit"], input[type="reset"], input[type="button"]
 	color: var(--color-background-1);
 
 	text-decoration: none;
-	line-height: normal;
-}
-
-
-select
-{
-	font-family: inherit;
-	padding: 0.5em;
-	margin: 0.6em;
-	box-shadow: none;
-	color: var(--text-color);
-	background-color: var(--background-color);
-	border: 1px solid var(--color-border);
 }
 
 
