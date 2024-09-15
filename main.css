@@ -125,11 +125,20 @@ header
 }
 
 
-main, header, nav
+main, nav
 {
 	padding-right: var(--global-content-padding);
 	padding-left: var(--global-content-padding);
 	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+
+header
+{
+	padding-right: var(--global-content-padding);
+	padding-left: var(--global-content-padding);
+	padding-top: 1rem;
 	padding-bottom: 2rem;
 }
 
@@ -156,7 +165,7 @@ ul
 
 
 /* Things that are centered */
-figure, img, video, div.scroll
+figure, main > img, video, div.scroll
 {
 	display: block;
 	margin-right: auto;
@@ -166,7 +175,13 @@ figure, img, video, div.scroll
 }
 
 
-/* Prevents overflow of container-like elements */
+figure > img
+{
+	width: 100%;
+	height: auto;
+}
+
+
 body, main, figure, div
 {
 	box-sizing: border-box;
@@ -175,7 +190,7 @@ body, main, figure, div
 
 figure, div
 {
-	box-sizing: border-box;
+	background-color: var(--color-background-2);
 	padding: 1rem;
 }
 
@@ -268,7 +283,7 @@ input[type="submit"], input[type="reset"], input[type="button"]
 }
 
 
-.viewSelector
+input.viewSelector
 {
 	margin: 0;
 }
