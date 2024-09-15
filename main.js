@@ -1,34 +1,57 @@
 const htmlBody = document.querySelector("body");
 
-const buttonShowSectionIndex = document.getElementById("toggleSectionIndex");
-buttonShowSectionIndex.addEventListener("click", toggleSectionIndex);
+const htmlMain = document.querySelector("main");
 
-const buttonGoTop = document.getElementById("goTopButton");
-buttonGoTop.addEventListener("click", goTop);
+const buttonGoTop = createButtonGoTop();
 
-const sectionIndex = document.getElementById("sectionIndex");
-sectionIndex.style.setProperty("display", "none");
+const viewTopics = createViewTopics();
+
+const viewIdiom = createViewIdiom();
+
+const views = [viewTopics, htmlMain, viewIdiom];
+
+const htmlHeader = createHeader();
 
 
-
-/* Scrolls page to top */
 function goTop ()
 {
 	document.querySelector("header").scrollIntoView();
+
 	return;
 }
 
 
 
-/*
-
-
-
-*/
-function generateSectionIndex ()
+function createButtonGoTop ()
 {
-	const headings = document.querySelectorAll("h1");
+	let buttonGoTop = document.createElement("input");
 
+	buttonGoTop.setAttribute("type", "button");
+
+	buttonGoTop.setAttribute("value", "Top");
+
+	buttonGoTop.setAttribute("id", "goTopButton");
+
+	htmlBody.appendChild(buttonGoTop);
+
+	buttonGoTop.addEventListener("click", goTop);
+
+	return buttonGoTop;
+}
+
+
+
+function createViewTopics ()
+{
+	let viewTopics = document.createElement("nav");
+
+	viewTopics.style.display = "none";
+
+	viewTopics.setAttribute( "class", "view" );
+
+	viewTopics.setAttribute( "id", "topics" );
+
+	const headings = document.querySelectorAll("h1");
 
 	for ( let i=0; i < headings.length; i++ )
 	{
@@ -47,86 +70,181 @@ function generateSectionIndex ()
 
 		section.appendChild(anchor);
 
-		sectionIndex.appendChild(section);
+		viewTopics.appendChild(section);
 	}
 
-	/* sectionIndex element is hidden by default */
-	sectionIndex.style.display = "none";
-	
-	return;
+	htmlBody.appendChild(viewTopics);
+
+	return viewTopics;
 }
 
 
-function toggleSectionIndex ()
-{
-	if ( sectionIndex.style.display === "none" )
-	{
-		document.querySelector("main").style.display = "none";
-				
-		sectionIndex.style.display = "grid";
-	}
-	
 
-	else
+function createViewIdiom ()
+{
+	let viewIdiom = document.createElement("nav");
+
+	viewIdiom.style.display = "none";
+
+	viewIdiom.setAttribute( "id", "idiom");
+
+	const pagePath = window.location.href;
+
+	const pageDir = pagePath.slice( 0, pagePath.lastIndexOf( "/" ) + 1 );
+
+	let pageName = pagePath.slice( pagePath.lastIndexOf( "/" ) + 1 , pagePath.indexOf( ".html" ) );
+
+	const idioms = ["pt-BR", "en-US"];
+
+	for ( let i=0; i < idioms.length; i++ )
 	{
-		document.querySelector("main").style.display = "grid";
+		pageName = pageName.replace( "." + idioms[i], "" );
+	}
+
+	for ( let i=0; i < idioms.length; i++ )
+	{
+		let paragraph = document.createElement("p");
 		
-		sectionIndex.style.display = "none";
+		if ( idioms[i] == document.querySelector( "meta[lang]" ).getAttribute( "lang" ) )
+		{
+			let mark = document.createElement("mark");
+
+			mark.textContent = idioms[i];
+
+			paragraph.appendChild(mark);
+		}
+
+		else 
+		{
+
+			let anchor = document.createElement("a");
+		
+			anchor.setAttribute("href", pageDir + pageName + "." + idioms[i] + ".html");
+
+			anchor.textContent = idioms[i];
+
+			paragraph.appendChild(anchor);
+		}
+
+		viewIdiom.appendChild(paragraph);
 	}
 
-	
-	return;
+	htmlBody.appendChild(viewIdiom);
+
+	return viewIdiom;
 }
 
 
-
-function toggleIdiomIndex ()
+function createHeader ()
 {
-	
+	const htmlHeader = document.createElement("header");
 
-	return;
+	htmlBody.insertBefore( htmlHeader, htmlMain );
+
+	const viewSelectors = document.createElement("div");
+
+	viewSelectors.setAttribute("id", "viewSelectors");
+
+	htmlHeader.appendChild(viewSelectors);
+
+	for ( let i = 0; i < views.length; i++)
+	{
+		let viewSelector = document.createElement("input");
+
+		viewSelector.setAttribute( "type", "button" );
+
+		viewSelector.setAttribute( "class", "viewSelector" );
+
+		if ( views[i].hasAttribute( "id" ) )
+		{
+			viewSelector.setAttribute( "value", views[i].getAttribute( "id" ) );
+		}
+
+		else
+		{
+			viewSelector.setAttribute( "value", views[i].tagName );
+		}
+
+		viewSelector.addEventListener( "click", showView );
+
+		viewSelectors.appendChild(viewSelector);
+	}
+
+	const title = document.createElement("h1");
+
+	title.textContent = document.querySelector("title").textContent;
+
+	htmlHeader.appendChild(title);
+
+	return htmlHeader;
 }
 
 
-
-/*
-Toggles element [main] by element with id [substituteId].
-*/
-function toggleMainContent ( substituteId )
+function showView ( event )
 {
+	for ( let i=0; i < views.length; i++ )
+	{
+		views[i].style.display = "none";
+	}
+
+	let view = document.querySelector( "#" + event.target.getAttribute( "value" ) );
+
+	if ( view == null )
+	{
+		view = document.querySelector( event.target.getAttribute( "value" ) );
+	}
+
+	const viewSelectors = document.querySelectorAll(".viewSelector");
+
+	for ( let i=0; i < viewSelectors.length; i++ )
+	{
+		viewSelectors[i].style.backgroundColor = "#956800";
+	}
+
+	event.target.style.backgroundColor = "#ffcd5b";
+
+	view.style.display = "block";
+
 	return;
 }
 
 
+function showViewByElement ( element )
+{
+	for ( let i=0; i < views.length; i++ )
+	{
+		views[i].style.display = "none";
+	}
 
-/*
+	const viewSelectors = document.querySelectorAll(".viewSelector");
 
-This function is called when anchor in [section index] is clicked.
+	for ( let i=0; i < viewSelectors.length; i++ )
+	{
+		if ( viewSelectors[i].getAttribute("value") == element.tagName || viewSelectors[i].getAttribute("value") == element.getAttribute( "id" ) )
+		{
+			viewSelectors[i].style.backgroundColor = "#ffcd5b";
+		}
 
-On execution, [section index] is hidden and the page view is scrolled to heading associated with the anchor that was clicked.
+		else
+		{
+			viewSelectors[i].style.backgroundColor = "#956800";
+		}
+	}
 
-The argument [event] is used to determine the heading to where the page view will be scrolled to.
+	element.style.display = "block";
 
-*/
+	return;
+}
+
+
 function scrollToHeading ( event )
 {
-	/* Close section index if it is open */
-	if ( sectionIndex.style.display === "grid" ) { toggleSectionIndex(); }
+	showViewByElement( htmlMain );
 
-
-	/*
-	Pass the [href] attribute of anchor clicked as input to function [querySelector].
-
-	[href] is an id, like [#head1] for example, so [querySelector] returns an object [Element].
-
-	On top of this object, we use the method [scrollIntoView].
-	*/
 	document.querySelector(event.target.getAttribute("href")).scrollIntoView();
 
 	return;
 }
 
-
-
-generateSectionIndex();
+showViewByElement( htmlMain );
 

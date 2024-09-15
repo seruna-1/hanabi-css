@@ -15,12 +15,12 @@
 }
 
 
-/* Global variables. */
 :root, ::backdrop
 {
 
-	/* Side of the biggest square that can fit into viewport */
 	--vq: min(100vw, 100vh);
+
+	--global-content-padding: calc( calc(100vw - var(--vq)) / 2 );
 
 	--main-font: "Julia Mono";
 
@@ -30,26 +30,22 @@
 
 	--color-background-2: #2b2b2b;
 
-	/* Normal text*/
+	--color-background-interactive: #ffb30029;
+
 	--color-text-normal: #dcdcdc;
 
-	/* Highlited text (not interative) */
 	--color-text-marked: #14bb00;
 
-	/* Less important text, ofuscated text */
 	--color-text-shadowed: grey;
 
-	/* Things that can be clicked. Includes anchors (links). Includes buttons (this is the color of a button backround). Does not includes text inside buttons, since its the button itself that can be clicked, not the text.*/
 	--color-clickable-normal: #ffb300;
 
 	--color-clickable-selected: #ffcd5b;
 
-	/* Color of lines that separate things (includes horizontal rules) */
 	--color-border: #545454;
 }
 
 
-/* Add a bit of transparency so light media isn't so glaring in dark mode */
 img, video { opacity: 0.8;}
 
 
@@ -57,6 +53,7 @@ img, video { opacity: 0.8;}
 mark, code, kbd, blockquote > *
 {
 	color: var(--color-text-marked);
+	background-color: unset;
 }
 
 
@@ -103,10 +100,7 @@ html
 	width: 100vw;
 	color: var(--color-text-normal);
 	background-color: var(--color-background-1);
-
-	/* Set the font globally */
 	font-family: var(--main-font);
-
 	scroll-behavior: smooth;
 	font-size: 1rem;
 }
@@ -114,17 +108,9 @@ html
 
 body
 {
-	margin: 0;
-	padding 0;
+	margin: 0px;
+	padding: 0px;
 	width: 100vw;
-	display: grid;
-
-	/* Space for main content will be the middle grid column */
-	grid-template-columns: 1fr var(--vq) 1fr;
-
-	/* First row is for header */
-	grid-template-rows: auto auto;
-
 }
 
 
@@ -134,33 +120,38 @@ header
 	background-color: var(--color-background-2);
 	border-color: var(--color-border);
 	border-bottom-style: solid;
-	border-width: var(--border-width);
+	border-bottom-width: var(--border-width);
 	text-align: center;
-
-	display: grid;
-
-	/* Three columns, same as body */
-	grid-template-columns: 1fr var(--vq) 1fr;
-
-	/* Occupies all columns of body, equivalent to 100vw */
-	grid-column-start: 1;
-	grid-column-end: 4;
 }
 
 
-header > *
+main, header, nav
 {
-	/* Space for content will be the middle grid column */
-	grid-column: 2;
+	padding-right: var(--global-content-padding);
+	padding-left: var(--global-content-padding);
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 
-main
+*:first-child
 {
-	padding-right: 0.5rem;
-	padding-left: 0.5rem;
-	grid-column: 2;
-	grid-row: 2;
+	margin-top: 0px;
+}
+
+
+*:last-child
+{
+	margin-bottom: 0px;
+}
+
+
+ul
+{
+	margin-left: 0.5rem;
+	border-left-style: solid;
+	border-left-width: var(--border-width);
+	border-left-color: var(--color-border);
 }
 
 
@@ -182,12 +173,10 @@ body, main, figure, div
 }
 
 
-/* Padding of container-like elements */
 figure, div
 {
 	box-sizing: border-box;
-	padding-left: 1rem;
-	padding-right: 1rem;
+	padding: 1rem;
 }
 
 
@@ -221,7 +210,7 @@ h1, h2, h3, h4, h5, h6
 
 
 /* Margin top and bottom for almost anything */
-p, li, figcaption, img, figure, div, code, mark
+p, li, figcaption, img, figure, div, code, mark, ul
 {
 	margin-top: 2em;
 	margin-bottom: 2em;
@@ -237,19 +226,15 @@ div.scroll
 
 	/* There is no overflow in y axis, because the height of the div grows along with the content. However, this prevents the browser to show vertical srcollbar. */
 	overflow-y: hidden;
-}
 
-
-div.scroll > *
-{
 	text-wrap: nowrap;
 }
 
 
 /*Clickable things*/
-button, input[type="submit"], input[type="reset"], input[type="button"]
+input[type="submit"], input[type="reset"], input[type="button"]
 {
-	margin: 1em;
+	margin: 1rem;
 	padding: 0.5rem;
 	border-width: 0px;
 	background-color: var(--color-clickable-normal);
@@ -263,48 +248,35 @@ button, input[type="submit"], input[type="reset"], input[type="button"]
 
 #goTopButton
 {
-	width: fit-content;
-	height: fit-content;
-	margin: 1rem;
 	position: fixed;
 	bottom: 0px;
 	right: 0px;
 }
 
 
-#topNavigations
+#viewSelectors
 {
-	width: 100%;
-	height: fit-content;
+	margin: 0px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 	border-bottom-style: solid;
-	border-bottom-width: 0.1rem;
+	border-bottom-width: var(--border-width);
+	border-bottom-color: var(--color-border);
+	background-color: var(--color-background-interactive);
 }
 
 
-#topNavigations > *
+.viewSelector
 {
-	width: fit-content;
-	height: fit-content;
-	margin: 1em;
+	margin: 0;
 }
 
 
 /* [navigation.js] will set property [display] to [none] so this element will be hidden by default. */
-#sectionIndex
+nav
 {
-	background-color: var(--accent-bg);
-	grid-column-start: 1;
-	grid-column-end: 4;
-	grid-row: 2;
-	grid-template-columns: 1fr var(--vq) 1fr;
+	background-color: var(--color-background-2);
 }
 
-
-#sectionIndex > *
-{
-	grid-column: 2;
-}
