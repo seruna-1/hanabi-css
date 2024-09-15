@@ -13,6 +13,38 @@ const views = [viewTopics, htmlMain, viewIdiom];
 const htmlHeader = createHeader();
 
 
+function getPageName ()
+{
+	const pagePath = window.location.href;
+
+	if ( pagePath.indexOf( ".html" ) == null )
+	{
+		return "index";
+	}
+
+	else
+	{
+		return pagePath.slice( pagePath.lastIndexOf( "/" ) + 1 , pagePath.indexOf( ".html" ) );
+	}
+}
+
+
+function getDirName ()
+{
+	const pagePath = window.location.href;
+
+	if ( pagePath.indexOf( ".html" ) == null )
+	{
+		return pagePath + "/";
+	}
+
+	else
+	{
+		return pagePath.slice( 0, pagePath.lastIndexOf( "/" ) + 1 );
+	}
+}
+
+
 function goTop ()
 {
 	document.querySelector("header").scrollIntoView();
@@ -84,15 +116,13 @@ function createViewIdiom ()
 {
 	let viewIdiom = document.createElement("nav");
 
+	let pageName = getPageName();
+
+	let dirName = getDirName();
+
 	viewIdiom.style.display = "none";
 
 	viewIdiom.setAttribute( "id", "idiom");
-
-	const pagePath = window.location.href;
-
-	const pageDir = pagePath.slice( 0, pagePath.lastIndexOf( "/" ) + 1 );
-
-	let pageName = pagePath.slice( pagePath.lastIndexOf( "/" ) + 1 , pagePath.indexOf( ".html" ) );
 
 	const idioms = ["pt-BR", "en-US"];
 
@@ -119,7 +149,7 @@ function createViewIdiom ()
 
 			let anchor = document.createElement("a");
 		
-			anchor.setAttribute("href", pageDir + pageName + "." + idioms[i] + ".html");
+			anchor.setAttribute("href", dirName + pageName + "." + idioms[i] + ".html");
 
 			anchor.textContent = idioms[i];
 
