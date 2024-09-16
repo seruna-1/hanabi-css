@@ -33,14 +33,19 @@ function getDirName ()
 {
 	const pagePath = window.location.href;
 
-	if ( pagePath.indexOf( ".html" ) == null )
+	if ( pagePath.indexOf( ".html" ) != null )
+	{
+		return pagePath.slice( 0, pagePath.lastIndexOf( "/" ) + 1 );
+	}
+
+	else if ( pagePath[pagePath.length - 1] != "/" )
 	{
 		return pagePath + "/";
 	}
 
-	else
+	else if ( pagePath[pagePath.length - 1] == "/" )
 	{
-		return pagePath.slice( 0, pagePath.lastIndexOf( "/" ) + 1 );
+		return pagePath;
 	}
 }
 
@@ -114,22 +119,24 @@ function createViewTopics ()
 
 function createViewIdiom ()
 {
+	const idioms = ["pt-BR", "en-US"];
+
 	let viewIdiom = document.createElement("nav");
-
-	let pageName = getPageName();
-
-	let dirName = getDirName();
 
 	viewIdiom.style.display = "none";
 
 	viewIdiom.setAttribute( "id", "idiom");
 
-	const idioms = ["pt-BR", "en-US"];
+	let pageName = getPageName();
+
+	let dirName = getDirName();
 
 	for ( let i=0; i < idioms.length; i++ )
 	{
 		pageName = pageName.replace( "." + idioms[i], "" );
 	}
+
+	console.log(pageName);
 
 	for ( let i=0; i < idioms.length; i++ )
 	{
@@ -146,7 +153,6 @@ function createViewIdiom ()
 
 		else 
 		{
-
 			let anchor = document.createElement("a");
 		
 			anchor.setAttribute("href", dirName + pageName + "." + idioms[i] + ".html");
