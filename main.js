@@ -17,7 +17,7 @@ function getPageName ()
 {
 	const pagePath = window.location.href;
 
-	if ( pagePath.indexOf( ".html" ) == null )
+	if ( pagePath.indexOf( ".html" ) == -1 )
 	{
 		return "index";
 	}
@@ -33,12 +33,12 @@ function getDirName ()
 {
 	const pagePath = window.location.href;
 
-	if ( pagePath.indexOf( ".html" ) == null  && pagePath[pagePath.length - 1] == "/" )
+	if ( pagePath.indexOf( ".html" ) == -1  && pagePath[pagePath.length - 1] == "/" )
 	{
 		return pagePath;
 	}
 
-	else if ( pagePath.indexOf( ".html" ) == null  && pagePath[pagePath.length - 1] != "/" )
+	else if ( pagePath.indexOf( ".html" ) == -1  && pagePath[pagePath.length - 1] != "/" )
 	{
 		return pagePath;
 	}
