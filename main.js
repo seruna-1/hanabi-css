@@ -40,12 +40,12 @@ function getDirName ()
 
 	else if ( pagePath.indexOf( ".html" ) == -1  && pagePath[pagePath.length - 1] != "/" )
 	{
-		return pagePath;
+		return pagePath + "/";
 	}
 
 	else
 	{
-		return pagePath.slice( 0, pagePath.lastIndexOf( "/" ) );
+		return pagePath.slice( 0, pagePath.lastIndexOf( "/" ) + 1 );
 	}
 }
 
@@ -158,7 +158,7 @@ function createViewIdiom ()
 		{
 			let anchor = document.createElement("a");
 		
-			anchor.setAttribute("href", dirName + "/" + pageName + "." + idioms[i] + ".html");
+			anchor.setAttribute("href", dirName + pageName + "." + idioms[i] + ".html");
 
 			anchor.textContent = idioms[i];
 
