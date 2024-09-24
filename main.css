@@ -230,16 +230,11 @@ p, li, figcaption, img, figure, div, code, mark, ul
 }
 
 
-/* In a div with class [scroll], text is not wrapped. Use this to insert code or something like an email, that is better understood whithout wrap. */
-div.scroll
+.scroll
 {
 	background-color: var(--color-background-2);
-
 	overflow-x: scroll;
-
-	/* There is no overflow in y axis, because the height of the div grows along with the content. However, this prevents the browser to show vertical srcollbar. */
 	overflow-y: hidden;
-
 	text-wrap: nowrap;
 }
 
